@@ -33,7 +33,6 @@ _Deployed using [Vercel](https://vercel.com)_
 - **Icons & UI**: Emojis, Custom styles
 - **Hosting**: Vercel (Free)
 
-<<<<<<< HEAD
 ## 📷 Screenshots
 
 ![Home](src/assets/screenshots/image-1.png)
@@ -67,8 +66,4 @@ npm start
 🙏 Credits
 - Mail.tm – Open-source disposable mail API
 - Tailwind CSS – Utility-first CSS framework
-<<<<<<< HEAD
 - React Hot Toast – Toast notifications
-=======
-- React Hot Toast – Toast notifications
->>>>>>> ddf41a5ee59f2f1e672fd3aca0a6228fbe963287
