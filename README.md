@@ -21,7 +21,7 @@ A modern, responsive temp mail (disposable email) web app built using **React** 
 
 ## 🔗 Live Demo
 
-👉 [Visit Live Website](https://your-vercel-url.vercel.app)  
+👉 [Visit Live Website](http://temp-mail-two-jade.vercel.app)  
 _Deployed using [Vercel](https://vercel.com)_
 
 ---
