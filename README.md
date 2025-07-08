@@ -39,8 +39,6 @@ _Deployed using [Vercel](https://vercel.com)_
 
 ![Message](src/assets/screenshots/image-2.png) 
 
-=======
->>>>>>> ddf41a5ee59f2f1e672fd3aca0a6228fbe963287
 ---
 
 ## 📦 Installation (Local)
