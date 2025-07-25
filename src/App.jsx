@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TempMailGenerates from './components/TempMailGenerates';
 import AdminPanel from './components/AdminPanel';
 import toast from 'react-hot-toast';
@@ -36,15 +36,37 @@ const App = () => {
   const [token, setToken] = useState('');
   const [password, setPassword] = useState('');
 
-  // Handler for direct login from admin panel
+  // Admin login handler: updates both admin and current session
   const handleAdminUserLogin = (userEmail, userPassword) => {
     loginToMailTm(userEmail, userPassword, (newEmail, newToken, newPassword) => {
       setEmail(newEmail);
       setToken(newToken);
       setPassword(newPassword);
-      setShowAdmin(false); // Optionally close Admin Panel
+      setShowAdmin(false);
+
+      // Save as admin session (for history) and also as current session (for use)
+      localStorage.setItem("adminEmail", newEmail);
+      localStorage.setItem("adminToken", newToken);
+      localStorage.setItem("adminPassword", newPassword);
+
+      localStorage.setItem("currentEmail", newEmail);
+      localStorage.setItem("currentToken", newToken);
+      localStorage.setItem("currentPassword", newPassword);
     });
   };
+
+  // On mount: always restore from current session
+  useEffect(() => {
+    const savedEmail = localStorage.getItem("currentEmail");
+    const savedToken = localStorage.getItem("currentToken");
+    const savedPassword = localStorage.getItem("currentPassword");
+
+    if (savedEmail && savedToken && savedPassword) {
+      setEmail(savedEmail);
+      setToken(savedToken);
+      setPassword(savedPassword);
+    }
+  }, []);
 
   return (
     <>
@@ -55,6 +77,21 @@ const App = () => {
         setEmail={setEmail}
         setToken={setToken}
         setPassword={setPassword}
+        onSessionChange={(newEmail, newToken, newPassword, type) => {
+          // Save both specific and current session
+          if (type === "temp") {
+            localStorage.setItem("tempMail", newEmail);
+            localStorage.setItem("tempToken", newToken);
+            localStorage.setItem("tempPassword", newPassword);
+          } else if (type === "custom") {
+            localStorage.setItem("customTempEmail", newEmail);
+            localStorage.setItem("customTempPassword", newPassword);
+          }
+          // Always set as current session for all
+          localStorage.setItem("currentEmail", newEmail);
+          localStorage.setItem("currentToken", newToken);
+          localStorage.setItem("currentPassword", newPassword);
+        }}
       />
       <button
         onClick={() => setShowAdmin(true)}

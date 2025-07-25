@@ -102,11 +102,13 @@ const CustomEmailGenerator = ({ onCreate, buttonClass }) => {
         if (loginRes.ok) {
           const loginData = await loginRes.json();
           toast.success('✅ Logged in with existing account!');
-          localStorage.setItem('tempMail', fullEmail);
-          localStorage.setItem('tempToken', loginData.token);
-          localStorage.setItem('tempPassword', password);
+          // Save to specific and current session
           localStorage.setItem('customTempEmail', fullEmail);
           localStorage.setItem('customTempPassword', password);
+
+          localStorage.setItem('currentEmail', fullEmail);
+          localStorage.setItem('currentToken', loginData.token);
+          localStorage.setItem('currentPassword', password);
 
           await saveUserToFirestore(fullEmail, password);
 
@@ -164,11 +166,13 @@ const CustomEmailGenerator = ({ onCreate, buttonClass }) => {
         return;
       }
 
-      localStorage.setItem('tempMail', fullEmail);
-      localStorage.setItem('tempToken', loginData.token);
-      localStorage.setItem('tempPassword', password);
+      // Save to specific and current session
       localStorage.setItem('customTempEmail', fullEmail);
       localStorage.setItem('customTempPassword', password);
+
+      localStorage.setItem('currentEmail', fullEmail);
+      localStorage.setItem('currentToken', loginData.token);
+      localStorage.setItem('currentPassword', password);
 
       await saveUserToFirestore(fullEmail, password);
 
